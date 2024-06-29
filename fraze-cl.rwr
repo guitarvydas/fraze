@@ -1,19 +1,21 @@
 fraze {
   Main [Fraze+] = ‛«Fraze»’
-  Fraze_deffraze [_f name Item _in Item2 ScopedBlock] = ‛«_f»«name»«Item»«_in»«Item2»«ScopedBlock»’
-  Fraze_ifwithelse [_if Item _is _a _var _then ThenScopedBlock _else ElseScopedBlock] = ‛«_if»«Item»«_is»«_a»«_var»«_then»«ThenScopedBlock»«_else»«ElseScopedBlock»’
-  Fraze_ifnoelse [_if Item _is _a _var _then ThenScopedBlock] = ‛«_if»«Item»«_is»«_a»«_var»«_then»«ThenScopedBlock»’
-  Fraze_ok [_] = ‛«_»’
-  Fraze_recur [_resolve _it _again _in _env] = ‛«_resolve»«_it»«_again»«_in»«_env»’
+  Fraze_deffraze [_f name Item _in Item2 ScopedBlock] ‛_.push_envname (Item2.rwr ())’ = ‛\n(defun «name» («Item»«Item2»)«ScopedBlock»)«_.pop_envname ()»’
+
+  Fraze_ifwithelse [_if Item _is _a _var _then ThenScopedBlock _else ElseScopedBlock] = ‛(if (var?! «Item») «ThenScopedBlock» «ElseScopedBlock»)’
+
+  Fraze_ifnoelse [_if Item _is _a _var _then ThenScopedBlock] = ‛(when (var?! «Item») «ThenScopedBlock»)’
+  Fraze_ok [_] = ‛’
+  Fraze_recur [_resolve _it _again _in _env] = ‛(resolve (it) ???)’
   Fraze_compoundnotif [_if Item _is _not _compound _then ScopedBlock] = ‛«_if»«Item»«_is»«_not»«_compound»«_then»«ScopedBlock»’
   Fraze_compoundif [_if Item _is _compound _then ScopedBlock] = ‛«_if»«Item»«_is»«_compound»«_then»«ScopedBlock»’
   Fraze_save [_save Item] = ‛«_save»«Item»’
   Fraze_divide_and_conquer [_break _it _down _into _parts _and _return _a _compound _with _each _element _deeply _resolved _in _env] = ‛«_break»«_it»«_down»«_into»«_parts»«_and»«_return»«_a»«_compound»«_with»«_each»«_element»«_deeply»«_resolved»«_in»«_env»’
 
-  Hole [lb name rb] = ‛«lb»«name»«rb»’
+  Hole [lb name rb] = ‛ «name» ’
 
 
-  It [x] = ‛«x»’
+  It [x] = ‛ *it* ’
   Item [x] = ‛«x»’
   ScopedBlock [lb Fraze+ rb] = ‛«lb»«Fraze»«rb»’
 
@@ -38,8 +40,8 @@ fraze {
 
   keyword [w] = ‛«w»’
 
-  reserved_keyword_because [_ ws] = ‛«_»«ws»’
-  reserved_keyword_it [_ ws] = ‛«_»«ws»’
+  reserved_keyword_because [_ ws] = ‛’
+  reserved_keyword_it [_ ws] = ‛ *it-stack* ’
 
   comment [_because c* _] = ‛«_because»«c»«_»’
   nl [c] = ‛«c»’
