@@ -1,0 +1,51 @@
+fraze {
+  Main = Fraze+
+  Fraze =
+    | "⨍" name Item "in" Item ScopedBlock -- deffraze
+    | "if" Item "is" "a" "var" "then" ScopedBlock "else" ScopedBlock -- innerfrazewithelse
+    | "if" Item "is" "a" "var" "then" ScopedBlock -- innerfrazenoelse
+    | "✓" -- ok
+    | "resolve" "𝑖𝑡" "again" "𝑖𝑛" "env" -- recur
+    | "if" Item "is" "not" "compound" "then" ScopedBlock -- ifnot
+    | "if" Item "is" "compound" "then" ScopedBlock -- if
+    | "𝓈𝒶𝓋ℯ" Item -- save
+    | "break" "𝑖𝑡" "down" "into" "parts" "and" "return" "a" "compound" "with" "each" "element" "deeply" "resolved" "𝑖𝑛" "env" -- deivide_and_conquer
+
+
+
+  Hole = "«" name "»"
+  It =  "𝑖𝑡"
+  Item = Hole | It
+  ScopedBlock = "⎨" Fraze+ "⎬"
+
+  name = ~keyword id
+  id = firstLetter followingLetter* #space?
+  firstLetter = ~reserved_unicode_character (letter | "'" | "-" | "?" | math_symbol | unicode_subscript | unicode_superscript)
+  followingLetter = firstLetter | digit
+  math_symbol = "\u{1d400}".."\u{1d7ff}"
+
+  tag = "‘" name "’"
+  
+  reserved_unicode_character = "ˀ" | "ᵅ" | "." | "・" | "◦" | "≡" | "⇒" | "⇐" | "«" | "»"
+  EQ_op = "≡ˀ"
+  DEF_op = ~EQ_op "≡"
+
+  unicode_superscript = "\u{00B0}" .. "\u{00BF}" | "\u{2070}" .. "\u{207F}"
+  unicode_subscript = "\u{2080}" .. "\u{209F}"
+
+  constant =
+    | "𝓕𝒶𝓁𝓈ℯ" #space -- false
+    | "𝒯𝓇𝓊ℯ" #space -- true
+    | "𝜙" #space  -- nothing
+
+  keyword = constant | reserved_keyword
+
+  reserved_keyword =
+    | "𝑏𝑒𝑐𝑎𝑢𝑠𝑒" #space
+    | "𝑖𝑡" #space
+
+  comment = "𝑏𝑒𝑐𝑎𝑢𝑠𝑒" (~#nl any)* (#nl | end)
+  space += comment
+  nl = "\n"
+}
+
