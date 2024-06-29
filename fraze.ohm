@@ -2,14 +2,14 @@ fraze {
   Main = Fraze+
   Fraze =
     | "⨍" name Item "in" Item ScopedBlock -- deffraze
-    | "if" Item "is" "a" "var" "then" ScopedBlock "else" ScopedBlock -- innerfrazewithelse
-    | "if" Item "is" "a" "var" "then" ScopedBlock -- innerfrazenoelse
+    | "if" Item "is" "a" "var" "then" ScopedBlock "else" ScopedBlock -- ifwithelse
+    | "if" Item "is" "a" "var" "then" ScopedBlock -- ifnoelse
     | "✓" -- ok
     | "resolve" "𝑖𝑡" "again" "𝑖𝑛" "env" -- recur
-    | "if" Item "is" "not" "compound" "then" ScopedBlock -- ifnot
-    | "if" Item "is" "compound" "then" ScopedBlock -- if
+    | "if" Item "is" "not" "compound" "then" ScopedBlock -- compoundnotif
+    | "if" Item "is" "compound" "then" ScopedBlock -- compoundif
     | "𝓈𝒶𝓋ℯ" Item -- save
-    | "break" "𝑖𝑡" "down" "into" "parts" "and" "return" "a" "compound" "with" "each" "element" "deeply" "resolved" "𝑖𝑛" "env" -- deivide_and_conquer
+    | "break" "𝑖𝑡" "down" "into" "parts" "and" "return" "a" "compound" "with" "each" "element" "deeply" "resolved" "𝑖𝑛" "env" -- divide_and_conquer
 
 
 
@@ -41,8 +41,8 @@ fraze {
   keyword = constant | reserved_keyword
 
   reserved_keyword =
-    | "𝑏𝑒𝑐𝑎𝑢𝑠𝑒" #space
-    | "𝑖𝑡" #space
+    | "𝑏𝑒𝑐𝑎𝑢𝑠𝑒" #space -- because
+    | "𝑖𝑡" #space -- it
 
   comment = "𝑏𝑒𝑐𝑎𝑢𝑠𝑒" (~#nl any)* (#nl | end)
   space += comment
