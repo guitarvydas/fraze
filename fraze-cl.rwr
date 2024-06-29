@@ -6,7 +6,7 @@ fraze {
 
   Fraze_ifnoelse [_if Item _is _a _var _then ThenScopedBlock] = ‛(when (var?! «Item») «ThenScopedBlock»)’
   Fraze_ok [_] = ‛’
-  Fraze_recur [_resolve _it _again _in _env] = ‛(resolve (it) ???)’
+  Fraze_recur [_resolve _it _again _in _env] = ‛(resolve (it) «_.get_envname ()»)’
   Fraze_compoundnotif [_if Item _is _not _compound _then ScopedBlock] = ‛«_if»«Item»«_is»«_not»«_compound»«_then»«ScopedBlock»’
   Fraze_compoundif [_if Item _is _compound _then ScopedBlock] = ‛«_if»«Item»«_is»«_compound»«_then»«ScopedBlock»’
   Fraze_save [_save Item] = ‛«_save»«Item»’
