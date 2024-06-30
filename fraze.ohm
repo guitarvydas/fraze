@@ -2,14 +2,15 @@ fraze {
   Main = Fraze+
   Fraze =
     | "⨍" name Item "in" Item ScopedBlock -- deffraze
-    | "if" Item "is" "a" "var" "then" ScopedBlock "else" ScopedBlock -- ifwithelse
-    | "if" Item "is" "a" "var" "then" ScopedBlock -- ifnoelse
+    | "if 𝑖𝑡 is a var then" ScopedBlock "else" ScopedBlock -- ifitwithelse
+    | "if" Item "is a var then" ScopedBlock -- ifnoelse
+    | "get 𝑖𝑡s value in" Item -- get
     | "✓" -- ok
-    | "resolve" "𝑖𝑡" "again" "𝑖𝑛" "env" -- recur
-    | "if" Item "is" "not" "compound" "then" ScopedBlock -- compoundnotif
-    | "if" Item "is" "compound" "then" ScopedBlock -- compoundif
+    | "resolve 𝑖𝑡 again 𝑖𝑛" Item -- recur
+    | "if" Item "is not compound then" ScopedBlock -- compoundnotif
+    | "if" Item "is compound and is not a var then" ScopedBlock -- compoundif
     | "𝓈𝒶𝓋ℯ" Item -- save
-    | "break" "𝑖𝑡" "down" "into" "parts" "and" "return" "a" "compound" "with" "each" "element" "deeply" "resolved" "𝑖𝑛" "env" -- divide_and_conquer
+    | "break 𝑖𝑡 down into parts and return a compound with each element deeply resolved 𝑖𝑛" Item -- divide_and_conquer
 
 
 
